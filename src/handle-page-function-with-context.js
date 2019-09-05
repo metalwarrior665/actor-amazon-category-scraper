@@ -17,7 +17,14 @@ module.exports = (context) => async ({ $, request, html }) => {
     }
 
     const thisId = parseCategoryId(request.url);
-    const thisTitle = $('#fst-hybrid-dynamic-h1 h1, .bxw-pageheader__title__text h1').text().trim();
+
+    const titleSelectors = [
+        '#fst-hybrid-dynamic-h1 h1',
+        '.bxw-pageheader__title__text h1',
+        '#searchDropdownBox option[selected]',
+        '#leftNav h4.a-text-bold:eq(0)',
+    ];
+    const thisTitle = $(titleSelectors.join(', ')).text().trim();
     const thisDepth = request.userData.depth || 0;
     const thisReferrer = request.userData.referrer;
 
