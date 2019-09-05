@@ -22,9 +22,9 @@ module.exports = (context) => async ({ $, request, html }) => {
         '#fst-hybrid-dynamic-h1 h1',
         '.bxw-pageheader__title__text h1',
         '#searchDropdownBox option[selected]',
-        '#leftNav h4.a-text-bold:eq(0)',
+        '#leftNav h4.a-text-bold',
     ];
-    const thisTitle = $(titleSelectors.join(', ')).text().trim();
+    const thisTitle = $(titleSelectors.join(', ')).eq(0).text().trim();
     const thisDepth = request.userData.depth || 0;
     const thisReferrer = request.userData.referrer;
 
