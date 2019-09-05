@@ -136,7 +136,7 @@ module.exports = (context) => async ({ $, request, html }) => {
         minimumProducts: maybeMinimumProducts,
         parents,
         children,
-        refferer: request.userData.referrer,
+        referrer: request.userData.referrer,
         depth: thisDepth,
     });
 };
