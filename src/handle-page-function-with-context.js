@@ -10,6 +10,12 @@ module.exports = (context) => async ({ $, request, html }) => {
         onlyDirect,
     } = context;
 
+    const title = $('title').text();
+
+    if (title.toLowerCase().includes('robot check')) {
+        throw new Error(`CAPTCHA n. ${request.retryCount + 1} --- ${request.url}`);
+    }
+
     const thisId = parseCategoryId(request.url);
     const thisTitle = $('#fst-hybrid-dynamic-h1 h1, .bxw-pageheader__title__text h1').text().trim();
     const thisDepth = request.userData.depth || 0;
