@@ -50,3 +50,12 @@ module.exports.pushCategory = (array, id, title) => {
     };
     pushUnique(array, categoryItem);
 };
+
+module.exports.findTitleInOrder = ($, selectors) => {
+    for (const selector of selectors) {
+        const text = $(selector).eq(0).text().trim();
+        if (text) {
+            return text;
+        }
+    }
+};

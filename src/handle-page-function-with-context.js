@@ -1,6 +1,6 @@
 const Apify = require('apify');
 
-const { safeMatch, parseCategoryId, createUrlFromId, pushCategory } = require('./utils.js');
+const { safeMatch, parseCategoryId, createUrlFromId, pushCategory, findTitleInOrder } = require('./utils.js');
 
 // We export a function with a context for convenience
 module.exports = (context) => async ({ $, request, html }) => {
@@ -19,12 +19,12 @@ module.exports = (context) => async ({ $, request, html }) => {
     const thisId = parseCategoryId(request.url);
 
     const titleSelectors = [
+        '#leftNav h4.a-text-bold',
         '#fst-hybrid-dynamic-h1 h1',
         '.bxw-pageheader__title__text h1',
         '#searchDropdownBox option[selected]',
-        '#leftNav h4.a-text-bold',
     ];
-    const thisTitle = $(titleSelectors.join(', ')).eq(0).text().trim();
+    const thisTitle = findTitleInOrder($, titleSelectors);
     const thisDepth = request.userData.depth || 0;
     const thisReferrer = request.userData.referrer;
 
